@@ -123,7 +123,11 @@ export default function PersistentDrawerLeft() {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = event => {
-    setAnchorEl(event.currentTarget);
+    if (anchorEl) {
+      setAnchorEl(null);
+    } else {
+      setAnchorEl(event.currentTarget);
+    }
   };
 
   const handleClose = () => {
@@ -174,14 +178,12 @@ export default function PersistentDrawerLeft() {
         </div>
         <Divider />
         <List>
-          <ListItem button key="Sort">
-            <Button
-              aria-controls="simple-menu"
-              aria-haspopup="true"
-              onClick={handleClick}
-            >
-              Sort by
-            </Button>
+          <ListItem
+            button
+            aria-controls="simple-menu"
+            aria-haspopup="true"
+            onClick={handleClick}
+          >
             <Menu
               id="simple-menu"
               anchorEl={anchorEl}
@@ -194,6 +196,10 @@ export default function PersistentDrawerLeft() {
               <MenuItem onClick={handleClose}>Top</MenuItem>
               <MenuItem onClick={handleClose}>Rising</MenuItem>
             </Menu>
+            <ListItemIcon>
+              <MailIcon />
+            </ListItemIcon>
+            <ListItemText primary="Sort by" />
           </ListItem>
         </List>
         <Divider />
