@@ -19,6 +19,9 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import Box from "@material-ui/core/Box";
 import TestImage from "./testImage";
+import Button from "@material-ui/core/Button";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 
 const drawerWidth = 240;
 const numberOfImages = 12;
@@ -88,6 +91,18 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+export function SimpleMenu() {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = event => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+}
+
 export function MediaCard() {
   const classes = useStyles();
 }
@@ -103,6 +118,16 @@ export default function PersistentDrawerLeft() {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = event => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
   return (
@@ -149,14 +174,27 @@ export default function PersistentDrawerLeft() {
         </div>
         <Divider />
         <List>
-          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+          <ListItem button key="Sort">
+            <Button
+              aria-controls="simple-menu"
+              aria-haspopup="true"
+              onClick={handleClick}
+            >
+              Sort by
+            </Button>
+            <Menu
+              id="simple-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleClose}>Hot</MenuItem>
+              <MenuItem onClick={handleClose}>New</MenuItem>
+              <MenuItem onClick={handleClose}>Top</MenuItem>
+              <MenuItem onClick={handleClose}>Rising</MenuItem>
+            </Menu>
+          </ListItem>
         </List>
         <Divider />
         <List>
@@ -168,6 +206,15 @@ export default function PersistentDrawerLeft() {
               <ListItemText primary={text} />
             </ListItem>
           ))}
+        </List>
+        <Divider />
+        <List>
+          <ListItem button key="LEON">
+            <ListItemIcon>
+              <MailIcon />
+            </ListItemIcon>
+            <ListItemText primary="LEON" />
+          </ListItem>
         </List>
       </Drawer>
       <main
