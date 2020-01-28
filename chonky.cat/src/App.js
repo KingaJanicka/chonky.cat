@@ -15,13 +15,20 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import Box from "@material-ui/core/Box";
 import TestImage from "./testImage";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
+import SortIcon from "@material-ui/icons/Sort";
+import DeleteIcon from "@material-ui/icons/Delete";
+import InboxIcon from "@material-ui/icons/Inbox";
+import PetsIcon from "@material-ui/icons/Pets";
+import WhatshotIcon from "@material-ui/icons/Whatshot";
+import NewReleasesIcon from "@material-ui/icons/NewReleases";
+import TrendingUpIcon from "@material-ui/icons/TrendingUp";
+import RedditIcon from "@material-ui/icons/Reddit";
 
 const drawerWidth = 240;
 const numberOfImages = 12;
@@ -87,7 +94,8 @@ const useStyles = makeStyles(theme => ({
   },
   imageContainer: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(345px, 1fr))"
+    gridTemplateColumns: "repeat(auto-fit, minmax(345px, 1fr))",
+    gridGap: "2em"
   }
 }));
 
@@ -191,33 +199,63 @@ export default function PersistentDrawerLeft() {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}>Hot</MenuItem>
-              <MenuItem onClick={handleClose}>New</MenuItem>
-              <MenuItem onClick={handleClose}>Top</MenuItem>
-              <MenuItem onClick={handleClose}>Rising</MenuItem>
+              <MenuItem onClick={handleClose}>
+                <ListItemIcon>
+                  <WhatshotIcon />
+                </ListItemIcon>
+                Hot
+              </MenuItem>
+              <MenuItem onClick={handleClose}>
+                <ListItemIcon>
+                  <NewReleasesIcon />
+                </ListItemIcon>
+                New
+              </MenuItem>
+              <MenuItem onClick={handleClose}>
+                <ListItemIcon>
+                  <RedditIcon />
+                </ListItemIcon>
+                Top
+              </MenuItem>
+              <MenuItem onClick={handleClose}>
+                <ListItemIcon>
+                  <TrendingUpIcon />
+                </ListItemIcon>
+                Rising
+              </MenuItem>
             </Menu>
             <ListItemIcon>
-              <MailIcon />
+              <SortIcon />
             </ListItemIcon>
             <ListItemText primary="Sort by" />
           </ListItem>
         </List>
         <Divider />
         <List>
-          {["All mail", "Trash", "Spam"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+          <ListItem>
+            <ListItemIcon>
+              <MailIcon />
+            </ListItemIcon>
+            <ListItemText primary="Mail" />
+          </ListItem>
+          <ListItem>
+            <ListItemIcon>
+              <InboxIcon />
+            </ListItemIcon>
+            <ListItemText primary="Spam" />
+          </ListItem>
+          <ListItem>
+            <ListItemIcon>
+              <DeleteIcon />
+            </ListItemIcon>
+            <ListItemText primary="Trash" />
+          </ListItem>
         </List>
         <Divider />
         <List>
-          <ListItem button key="LEON">
+          <ListItem>
             <ListItemIcon>
-              <MailIcon />
+              <PetsIcon />
             </ListItemIcon>
             <ListItemText primary="LEON" />
           </ListItem>
