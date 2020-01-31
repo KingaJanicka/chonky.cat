@@ -238,19 +238,19 @@ export default function PersistentDrawerLeft() {
           </List>
           <Divider />
           <List>
-            <ListItem>
+            <ListItem button key="Mail">
               <ListItemIcon>
                 <MailIcon />
               </ListItemIcon>
               <ListItemText primary="Mail" />
             </ListItem>
-            <ListItem>
+            <ListItem button key="Spam">
               <ListItemIcon>
                 <InboxIcon />
               </ListItemIcon>
               <ListItemText primary="Spam" />
             </ListItem>
-            <ListItem>
+            <ListItem button key="Trash">
               <ListItemIcon>
                 <DeleteIcon />
               </ListItemIcon>
@@ -259,7 +259,7 @@ export default function PersistentDrawerLeft() {
           </List>
           <Divider />
           <List>
-            <ListItem>
+            <ListItem button key="LEON">
               <ListItemIcon>
                 <PetsIcon />
               </ListItemIcon>
