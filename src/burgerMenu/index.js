@@ -19,6 +19,8 @@ import Divider from "@material-ui/core/Divider";
 import List from "@material-ui/core/List";
 import Drawer from "@material-ui/core/Drawer";
 import IconButton from "@material-ui/core/IconButton";
+import { Link as RouterLink } from "@reach/router";
+import Link from "@material-ui/core/Link";
 
 const BurgerMenu = ({ classes, open, setOpen, theme }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -127,12 +129,14 @@ const BurgerMenu = ({ classes, open, setOpen, theme }) => {
       </List>
       <Divider />
       <List>
-        <ListItem button text="LEON">
-          <ListItemIcon>
-            <PetsIcon />
-          </ListItemIcon>
-          <ListItemText primary="LEON" />
-        </ListItem>
+        <Link component={RouterLink} to="/Leon" color="white">
+          <ListItem button text="LEON">
+            <ListItemIcon>
+              <PetsIcon />
+            </ListItemIcon>
+            <ListItemText primary="LEON" />
+          </ListItem>
+        </Link>
       </List>
     </Drawer>
   );

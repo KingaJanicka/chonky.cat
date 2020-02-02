@@ -1,4 +1,5 @@
 import React, { createContext, useState } from "react";
+import { Router, Link as RouterLink } from "@reach/router";
 import clsx from "clsx";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -7,8 +8,11 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
-import TestImage from "./testImage";
 import BurgerMenu from "./burgerMenu";
+import Index from "./pages";
+import Leon from "./pages/leon";
+import Link from "@material-ui/core/Link";
+
 const defaultState = {
   layout: "grid"
 };
@@ -130,7 +134,9 @@ export default function PersistentDrawerLeft() {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" noWrap>
-              Chonky.cat
+              <Link component={RouterLink} to="/" color="white">
+                Chonky.cat
+              </Link>
             </Typography>
           </Toolbar>
         </AppBar>
@@ -146,29 +152,16 @@ export default function PersistentDrawerLeft() {
           })}
         >
           <div className={classes.drawerHeader} />
-          <Typography paragraph>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
-            dolor purus non enim praesent elementum facilisis leo vel. Risus at
-            ultrices mi tempus imperdiet. Semper risus in hendrerit gravida
-            rutrum quisque non tellus. Convallis convallis tellus id interdum
-            velit laoreet id donec ultrices. Odio morbi quis commodo odio aenean
-            sed adipiscing. Amet nisl suscipit adipiscing bibendum est ultricies
-            integer quis. Cursus euismod quis viverra nibh cras. Metus vulputate
-            eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo
-            quis imperdiet massa tincidunt. Cras tincidunt lobortis feugiat
-            vivamus at augue. At augue eget arcu dictum varius duis at
-            consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem
-            donec massa sapien faucibus et molestie ac.
-          </Typography>
-
-          <div className={clsx(classes.imageContainer, classes[store.layout])}>
-            {Array(numberOfImages)
-              .fill()
-              .map(() => (
-                <TestImage classes={classes} />
-              ))}
-          </div>
+          <Router>
+            <Index
+              path="/"
+              classes={classes}
+              open={open}
+              store={store}
+              numberOfImages={numberOfImages}
+            />
+            <Leon path="/Leon" />
+          </Router>
         </main>
       </div>
     </context.Provider>
