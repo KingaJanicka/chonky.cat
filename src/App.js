@@ -160,14 +160,14 @@ export default function PersistentDrawerLeft() {
         >
           <div className={classes.drawerHeader} />
           <Router>
-            <Index
-              path="/"
+            <Hot
+              default
+              path="/Hot"
               classes={classes}
               open={open}
               store={store}
               numberOfImages={numberOfImages}
             />
-            <Hot path="/Hot" />
             <New path="/New" />
             <Top path="/Top" />
             <Rising path="/Rising" />
