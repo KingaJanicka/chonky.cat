@@ -12,6 +12,13 @@ import BurgerMenu from "./burgerMenu";
 import Index from "./pages";
 import Leon from "./pages/leon";
 import Link from "@material-ui/core/Link";
+import Hot from "./pages/hot";
+import Mail from "./pages/mail";
+import New from "./pages/new";
+import Rising from "./pages/rising";
+import Spam from "./pages/spam";
+import Top from "./pages/top";
+import Trash from "./pages/trash";
 
 const defaultState = {
   layout: "grid"
@@ -160,6 +167,13 @@ export default function PersistentDrawerLeft() {
               store={store}
               numberOfImages={numberOfImages}
             />
+            <Hot path="/Hot" />
+            <New path="/New" />
+            <Top path="/Top" />
+            <Rising path="/Rising" />
+            <Mail path="/Mail" />
+            <Spam path="/Spam" />
+            <Trash path="/Trash" />
             <Leon path="/Leon" />
           </Router>
         </main>

@@ -75,30 +75,38 @@ const BurgerMenu = ({ classes, open, setOpen, theme }) => {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            <MenuItem onClick={handleClose}>
-              <ListItemIcon>
-                <WhatshotIcon />
-              </ListItemIcon>
-              Hot
-            </MenuItem>
-            <MenuItem onClick={handleClose}>
-              <ListItemIcon>
-                <NewReleasesIcon />
-              </ListItemIcon>
-              New
-            </MenuItem>
-            <MenuItem onClick={handleClose}>
-              <ListItemIcon>
-                <RedditIcon />
-              </ListItemIcon>
-              Top
-            </MenuItem>
-            <MenuItem onClick={handleClose}>
-              <ListItemIcon>
-                <TrendingUpIcon />
-              </ListItemIcon>
-              Rising
-            </MenuItem>
+            <Link component={RouterLink} to="/Hot" color="white">
+              <MenuItem onClick={handleClose}>
+                <ListItemIcon>
+                  <WhatshotIcon />
+                </ListItemIcon>
+                <ListItemText primary="Hot" />
+              </MenuItem>
+            </Link>
+            <Link component={RouterLink} to="/New" color="white">
+              <MenuItem onClick={handleClose}>
+                <ListItemIcon>
+                  <NewReleasesIcon />
+                </ListItemIcon>
+                <ListItemText primary="New" />
+              </MenuItem>
+            </Link>
+            <Link component={RouterLink} to="/Top" color="white">
+              <MenuItem onClick={handleClose}>
+                <ListItemIcon>
+                  <RedditIcon />
+                </ListItemIcon>
+                <ListItemText primary="Top" />
+              </MenuItem>
+            </Link>
+            <Link component={RouterLink} to="/Rising" color="white">
+              <MenuItem onClick={handleClose}>
+                <ListItemIcon>
+                  <TrendingUpIcon />
+                </ListItemIcon>
+                <ListItemText primary="Rising" />
+              </MenuItem>
+            </Link>
           </Menu>
           <ListItemIcon>
             <SortIcon />
@@ -108,24 +116,30 @@ const BurgerMenu = ({ classes, open, setOpen, theme }) => {
       </List>
       <Divider />
       <List>
-        <ListItem button text="Mail">
-          <ListItemIcon>
-            <MailIcon />
-          </ListItemIcon>
-          <ListItemText primary="Mail" />
-        </ListItem>
-        <ListItem button text="Spam">
-          <ListItemIcon>
-            <InboxIcon />
-          </ListItemIcon>
-          <ListItemText primary="Spam" />
-        </ListItem>
-        <ListItem button text="Trash">
-          <ListItemIcon>
-            <DeleteIcon />
-          </ListItemIcon>
-          <ListItemText primary="Trash" />
-        </ListItem>
+        <Link component={RouterLink} to="/Mail" color="white">
+          <ListItem button text="Mail">
+            <ListItemIcon>
+              <MailIcon />
+            </ListItemIcon>
+            <ListItemText primary="Mail" />
+          </ListItem>
+        </Link>
+        <Link component={RouterLink} to="/Spam" color="white">
+          <ListItem button text="Spam">
+            <ListItemIcon>
+              <InboxIcon />
+            </ListItemIcon>
+            <ListItemText primary="Spam" />
+          </ListItem>
+        </Link>
+        <Link component={RouterLink} to="/Trash" color="white">
+          <ListItem button text="Trash">
+            <ListItemIcon>
+              <DeleteIcon />
+            </ListItemIcon>
+            <ListItemText primary="Trash" />
+          </ListItem>
+        </Link>
       </List>
       <Divider />
       <List>

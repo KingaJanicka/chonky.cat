@@ -1,6 +1,6 @@
 import React from "react";
 import Typography from "@material-ui/core/Typography";
 
-const Leon = () => <Typography paragraph>Leon</Typography>;
+const Hot = () => <Typography paragraph>Hot</Typography>;
 
-export default Leon;
+export default Hot;
