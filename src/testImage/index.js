@@ -3,7 +3,7 @@ import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardActionArea from "@material-ui/core/CardActionArea";
 
-const testImage = ({ classes }) => {
+const testImage = ({ classes, url }) => {
   const w = Math.round(Math.random() * 800);
   const h = Math.round(Math.random() * 800);
 
@@ -12,7 +12,7 @@ const testImage = ({ classes }) => {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image={`https://placeimg.com/${w}/${h}/animals`}
+          image={url || `https://placeimg.com/${w}/${h}/animals`}
           title="animal"
         ></CardMedia>
       </CardActionArea>

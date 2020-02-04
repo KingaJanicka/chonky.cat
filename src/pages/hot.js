@@ -5,12 +5,15 @@ import Typography from "@material-ui/core/Typography";
 
 const Hot = ({ classes, open, store, numberOfImages }) => {
   const [images, setImages] = useState([]);
+
   useEffect(() => {
-    const endPoint = "https://www.reddit.com/r/airplaneears/.rss?sort=hot";
+    const endPoint = "/api/images/hot";
     fetch(endPoint)
-      .then(res => res.xml())
-      .then(console.log);
-  });
+      .then(res => res.json())
+      .then(res => {
+        setImages(res);
+      });
+  }, []);
   return (
     <>
       <Typography paragraph>
@@ -29,11 +32,9 @@ const Hot = ({ classes, open, store, numberOfImages }) => {
       </Typography>
 
       <div className={clsx(classes.imageContainer, classes[store.layout])}>
-        {Array(numberOfImages)
-          .fill()
-          .map(() => (
-            <TestImage classes={classes} />
-          ))}
+        {images.map(d => (
+          <TestImage classes={classes} url={`${d.content[0]}.jpg`} />
+        ))}
       </div>
     </>
   );
