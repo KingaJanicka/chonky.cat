@@ -12,10 +12,11 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-scripts": "3.3.0",
-    "rss-parser": "^3.7.5"
+    "rss-parser": "^3.7.5",
+    "snoowrap": "^1.20.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "now dev",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
