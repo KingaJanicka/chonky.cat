@@ -1,5 +1,5 @@
 import React, { createContext, useState } from "react";
-import { Router, Link as RouterLink } from "@reach/router";
+import { Router, Link as RouterLink, Redirect } from "@reach/router";
 import clsx from "clsx";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -168,19 +168,20 @@ export default function PersistentDrawerLeft() {
               numberOfImages={numberOfImages}
             />
             <Hot
-              path="/Hot"
+              path="/Hot/:page"
               classes={classes}
               open={open}
               store={store}
               numberOfImages={numberOfImages}
             />
-            <New path="/New" />
-            <Top path="/Top" />
-            <Rising path="/Rising" />
-            <Mail path="/Mail" />
-            <Spam path="/Spam" />
-            <Trash path="/Trash" />
-            <Leon path="/Leon" />
+            <New path="/New/:page" />
+            <Top path="/Top/:page" />
+            <Rising path="/Rising/:page" />
+            <Mail path="/Mail/:page" />
+            <Spam path="/Spam/:page" />
+            <Trash path="/Trash/:page" />
+            <Leon path="/Leon/:page" />
+            <Redirect from="/Hot" to="/Hot/1" />
           </Router>
         </main>
       </div>

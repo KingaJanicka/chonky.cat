@@ -3,17 +3,17 @@ import clsx from "clsx";
 import TestImage from "../testImage";
 import Typography from "@material-ui/core/Typography";
 
-const Hot = ({ classes, open, store, numberOfImages }) => {
+const Hot = ({ classes, open, store, numberOfImages, page }) => {
   const [images, setImages] = useState([]);
 
   useEffect(() => {
-    const endPoint = "/api/images/hot";
+    const endPoint = `/api/images/hot?page=${page}`;
     fetch(endPoint)
       .then(res => res.json())
       .then(res => {
         setImages(res);
       });
-  }, []);
+  }, [page]);
   return (
     <>
       <Typography paragraph>
@@ -33,7 +33,7 @@ const Hot = ({ classes, open, store, numberOfImages }) => {
 
       <div className={clsx(classes.imageContainer, classes[store.layout])}>
         {images.map(d => (
-          <TestImage classes={classes} url={`${d.content[0]}.jpg`} />
+          <TestImage classes={classes} url={d.url} />
         ))}
       </div>
     </>
