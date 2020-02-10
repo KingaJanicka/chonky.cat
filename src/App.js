@@ -12,12 +12,9 @@ import BurgerMenu from "./burgerMenu";
 import Index from "./pages";
 import Leon from "./pages/leon";
 import Link from "@material-ui/core/Link";
-import Hot from "./pages/hot";
+import ImageGrid from "./pages/imageGrid";
 import Mail from "./pages/mail";
-import New from "./pages/new";
-import Rising from "./pages/rising";
 import Spam from "./pages/spam";
-import Top from "./pages/top";
 import Trash from "./pages/trash";
 
 const defaultState = {
@@ -132,7 +129,7 @@ export default function PersistentDrawerLeft() {
         >
           <Toolbar>
             <IconButton
-              color="yellow"
+              color="Yellow"
               aria-label="open drawer"
               onClick={handleDrawerOpen}
               edge="start"
@@ -141,7 +138,7 @@ export default function PersistentDrawerLeft() {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" noWrap>
-              <Link component={RouterLink} to="/" color="white">
+              <Link component={RouterLink} to="/" color="White">
                 Chonky.cat
               </Link>
             </Typography>
@@ -160,27 +157,37 @@ export default function PersistentDrawerLeft() {
         >
           <div className={classes.drawerHeader} />
           <Router>
-            <Hot
-              path="/"
-              classes={classes}
-              open={open}
-              store={store}
-              numberOfImages={numberOfImages}
-            />
-            <Hot
+            <ImageGrid path="/" classes={classes} store={store} />
+            <ImageGrid
               path="/Hot/:page"
               classes={classes}
-              open={open}
               store={store}
-              numberOfImages={numberOfImages}
+              sort={"Hot"}
             />
-            <New path="/New/:page" />
-            <Top path="/Top/:page" />
-            <Rising path="/Rising/:page" />
-            <Mail path="/Mail/:page" />
+            <ImageGrid
+              path="/New/:page"
+              classes={classes}
+              store={store}
+              sort={"New"}
+            />
+            <ImageGrid
+              path="/Top/:page"
+              classes={classes}
+              store={store}
+              sort={"Top"}
+            />
+            <ImageGrid
+              path="/Rising/:page"
+              classes={classes}
+              store={store}
+              sort={"Rising"}
+            />
+            <Leon path="/Leon/:page" classes={classes} store={store} />
+
+            {/* <Mail path="/Mail/:page" />
             <Spam path="/Spam/:page" />
             <Trash path="/Trash/:page" />
-            <Leon path="/Leon/:page" />
+             */}
             <Redirect from="/Hot" to="/Hot/1" />
           </Router>
         </main>

@@ -1,3 +1,3 @@
-import Hot from "./hot";
+// import Hot from "./hot";
 
-export default Hot;
+// export default Hot;
