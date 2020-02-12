@@ -19,8 +19,8 @@ export default async (req, res) => {
   switch (sort) {
     default:
     case "hot":
-      return res.json(
-        (
+      try {
+        const result = (
           await Promise.all(
             multireddit.subreddits.map(async subreddit =>
               (await subreddit.getHot({ limit: 1 * page }))
@@ -29,14 +29,19 @@ export default async (req, res) => {
                   url: d.url,
                   author: d.author,
                   created_utc: d.created_utc,
-                  subreddit: d.subreddit_name_prefixed
+                  subreddit: d.subreddit_name_prefixed,
+                  thumbnail: d.thumbnail
                 }))
                 .filter(d => d.url.endsWith(".jpg"))
                 .slice(page - 1, page)
             )
           )
-        ).reduce((a, c) => a.concat(c), [])
-      );
+        ).reduce((a, c) => a.concat(c), []);
+
+        return res.json(result);
+      } catch (e) {
+        return res.json([]);
+      }
     case "rising":
       return res.json(
         (
@@ -79,7 +84,8 @@ export default async (req, res) => {
                 url: d.url,
                 author: d.author,
                 created_utc: d.created_utc,
-                subreddit: d.subreddit_name_prefixed
+                subreddit: d.subreddit_name_prefixed,
+                thumbnail: d.thumbnail
               }))
             )
           )

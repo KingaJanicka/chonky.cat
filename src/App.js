@@ -13,9 +13,6 @@ import Index from "./pages";
 import Leon from "./pages/leon";
 import Link from "@material-ui/core/Link";
 import ImageGrid from "./pages/imageGrid";
-import Mail from "./pages/mail";
-import Spam from "./pages/spam";
-import Trash from "./pages/trash";
 
 const defaultState = {
   layout: "grid"
@@ -183,11 +180,6 @@ export default function PersistentDrawerLeft() {
               sort={"Rising"}
             />
             <Leon path="/Leon/:page" classes={classes} store={store} />
-
-            {/* <Mail path="/Mail/:page" />
-            <Spam path="/Spam/:page" />
-            <Trash path="/Trash/:page" />
-             */}
             <Redirect from="/Hot" to="/Hot/1" />
           </Router>
         </main>

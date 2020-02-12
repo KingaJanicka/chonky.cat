@@ -4,7 +4,7 @@ import TestImage from "../testImage";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
-import Link from "@material-ui/core/Link";
+import { Link as RouterLink } from "@reach/router";
 
 const ImageGrid = ({ classes, open, store, numberOfImages, page, sort }) => {
   const [images, setImages] = useState([]);
@@ -36,17 +36,17 @@ const ImageGrid = ({ classes, open, store, numberOfImages, page, sort }) => {
 
       <div className={clsx(classes.imageContainer, classes[store.layout])}>
         {images.map(d => (
-          <TestImage classes={classes} url={d.url} />
+          <TestImage classes={classes} thumbnail={d.thumbnail} url={d.url} />
         ))}
       </div>
       <ButtonGroup color="primary" aria-label="outlined primary button group">
         {page > 1 && (
-          <Button>
-            <Link href={`/${sort}/${Number(page - 1)}`}>Back</Link>
+          <Button component={RouterLink} to={`/${sort}/${Number(page) - 1}`}>
+            Back
           </Button>
         )}
-        <Button>
-          <Link href={`/${sort}/${Number(page + 1)}`}>Next</Link>
+        <Button component={RouterLink} to={`/${sort}/${Number(page) + 1}`}>
+          Next
         </Button>
       </ButtonGroup>
     </>
