@@ -16,6 +16,7 @@ const testImage = ({ classes, url, thumbnail }) => {
             className={classes.media}
             image={thumbnail || url || `https://placeimg.com/${w}/${h}/animals`}
             title="animal"
+            loading="lazy"
           ></CardMedia>
         </Link>
       </CardActionArea>
