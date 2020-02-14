@@ -36,11 +36,7 @@ const ImageGrid = ({ classes, open, store, numberOfImages, page, sort }) => {
 
       <div className={clsx(classes.imageContainer, classes[store.layout])}>
         {images.map(d => (
-          <TestImage
-            classes={classes}
-            thumbnail={`${d.content[0]}.jpg`}
-            url={d.url}
-          />
+          <TestImage classes={classes} thumbnail={d.thumbnail} full={d.full} />
         ))}
       </div>
       <ButtonGroup color="primary" aria-label="outlined primary button group">
