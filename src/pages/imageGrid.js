@@ -5,10 +5,19 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import { Link as RouterLink } from "@reach/router";
+import Modal from "../modal";
 
-const ImageGrid = ({ classes, open, store, numberOfImages, page, sort }) => {
+const ImageGrid = ({ classes, store, page, sort, AlertDialog }) => {
   const [images, setImages] = useState([]);
+  const [url, setOpen] = React.useState(false);
 
+  const handleClickOpen = img => {
+    setOpen(img);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   useEffect(() => {
     const endPoint = `/api/images/${sort}?page=${page}`;
     fetch(endPoint)
@@ -36,8 +45,21 @@ const ImageGrid = ({ classes, open, store, numberOfImages, page, sort }) => {
 
       <div className={clsx(classes.imageContainer, classes[store.layout])}>
         {images.map(d => (
-          <TestImage classes={classes} thumbnail={d.thumbnail} full={d.full} />
+          <div>
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={() => handleClickOpen(d.full)}
+            >
+              <TestImage
+                classes={classes}
+                thumbnail={d.thumbnail}
+                full={d.full}
+              />
+            </Button>
+          </div>
         ))}
+        <Modal url={url} classes={classes} handleClose={handleClose} />
       </div>
       <ButtonGroup color="primary" aria-label="outlined primary button group">
         {page > 1 && (

@@ -11,7 +11,7 @@ const testImage = ({ classes, full, thumbnail }) => {
   return (
     <Card className={classes.card}>
       <CardActionArea>
-        <Link href={full}>
+        <Link>
           <CardMedia
             className={classes.media}
             image={

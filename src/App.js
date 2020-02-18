@@ -9,7 +9,6 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import BurgerMenu from "./burgerMenu";
-import Index from "./pages";
 import Leon from "./pages/leon";
 import Link from "@material-ui/core/Link";
 import ImageGrid from "./pages/imageGrid";
@@ -19,7 +18,6 @@ const defaultState = {
 };
 export const context = createContext(defaultState);
 const drawerWidth = 240;
-const numberOfImages = 12;
 const useStyles = makeStyles(theme => ({
   root: {
     display: "flex"
@@ -86,22 +84,6 @@ const useStyles = makeStyles(theme => ({
     gridGap: "2em"
   }
 }));
-
-export function SimpleMenu() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
-  const handleClick = event => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-}
-
-export function MediaCard() {
-  const classes = useStyles();
-}
 
 export default function PersistentDrawerLeft() {
   const classes = useStyles();
