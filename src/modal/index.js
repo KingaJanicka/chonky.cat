@@ -14,7 +14,8 @@ const Modal = ({ url, classes, handleClose }) => (
     aria-describedby="alert-dialog-description"
   >
     <DialogContent>
-      <TestImage classes={classes} full={url} />
+      {/* <TestImage classes={classes} full={url} /> */}
+      <img src={url} width="100%" />
     </DialogContent>
   </Dialog>
 );

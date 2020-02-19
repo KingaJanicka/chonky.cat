@@ -45,19 +45,17 @@ const ImageGrid = ({ classes, store, page, sort, AlertDialog }) => {
 
       <div className={clsx(classes.imageContainer, classes[store.layout])}>
         {images.map(d => (
-          <div>
-            <Button
-              variant="outlined"
-              color="primary"
-              onClick={() => handleClickOpen(d.full)}
-            >
-              <TestImage
-                classes={classes}
-                thumbnail={d.thumbnail}
-                full={d.full}
-              />
-            </Button>
-          </div>
+          <Button
+            variant="outlined"
+            color="primary"
+            onClick={() => handleClickOpen(d.full)}
+          >
+            <TestImage
+              classes={classes}
+              thumbnail={d.thumbnail}
+              full={d.full}
+            />
+          </Button>
         ))}
         <Modal url={url} classes={classes} handleClose={handleClose} />
       </div>
