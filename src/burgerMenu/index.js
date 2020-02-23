@@ -115,7 +115,7 @@ const BurgerMenu = ({ classes, open, setOpen, theme }) => {
         </ListItem>
       </List>
       <Divider />
-      <List>
+      {/* <List>
         <Link component={RouterLink} to="/Mail" color="white">
           <ListItem button text="Mail">
             <ListItemIcon>
@@ -141,7 +141,7 @@ const BurgerMenu = ({ classes, open, setOpen, theme }) => {
           </ListItem>
         </Link>
       </List>
-      <Divider />
+      <Divider /> */}
       <List>
         <Link component={RouterLink} to="/Leon" color="white">
           <ListItem button text="LEON">

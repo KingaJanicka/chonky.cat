@@ -23,6 +23,7 @@ const ImageGrid = ({ classes, store, page, sort, AlertDialog }) => {
     fetch(endPoint)
       .then(res => res.json())
       .then(res => {
+        console.log(res);
         setImages(res);
       });
   }, [page, sort]);

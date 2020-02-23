@@ -161,7 +161,12 @@ export default function PersistentDrawerLeft() {
               store={store}
               sort={"Rising"}
             />
-            <Leon path="/Leon/:page" classes={classes} store={store} />
+            <ImageGrid
+              path="/Leon/:page"
+              classes={classes}
+              store={store}
+              sort={"leon"}
+            />
             <Redirect from="/Hot" to="/Hot/1" />
           </Router>
         </main>
