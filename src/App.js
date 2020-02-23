@@ -168,6 +168,7 @@ export default function PersistentDrawerLeft() {
               sort={"leon"}
             />
             <Redirect from="/Hot" to="/Hot/1" />
+            <Redirect from="/Leon" to="/Leon/1" />
           </Router>
         </main>
       </div>
