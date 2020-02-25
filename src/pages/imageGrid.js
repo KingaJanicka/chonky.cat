@@ -32,7 +32,7 @@ const ImageGrid = ({ classes, store, page, sort, AlertDialog }) => {
       <div className={clsx(classes.imageContainer, classes[store.layout])}>
         {images.map(d => (
           <Button
-            variant="outlined"
+            variant="text"
             color="primary"
             onClick={() => handleClickOpen(d.full)}
           >

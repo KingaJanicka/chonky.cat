@@ -82,6 +82,9 @@ const useStyles = makeStyles(theme => ({
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(345px, 1fr))",
     gridGap: "2em"
+  },
+  link: {
+    color: "white"
   }
 }));
 
@@ -108,7 +111,7 @@ export default function PersistentDrawerLeft() {
         >
           <Toolbar>
             <IconButton
-              color="Yellow"
+              color="yellow"
               aria-label="open drawer"
               onClick={handleDrawerOpen}
               edge="start"
@@ -117,7 +120,7 @@ export default function PersistentDrawerLeft() {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" noWrap>
-              <Link component={RouterLink} to="/" color="White">
+              <Link component={RouterLink} to="/" color="textSecondary">
                 Chonky.cat
               </Link>
             </Typography>

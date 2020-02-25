@@ -10,12 +10,15 @@ const Modal = ({ url, classes, handleClose }) => (
   <Dialog
     open={!!url}
     onClose={handleClose}
+    maxWidth="md"
     aria-labelledby="alert-dialog-title"
     aria-describedby="alert-dialog-description"
   >
     <DialogContent>
       {/* <TestImage classes={classes} full={url} /> */}
-      <img src={url} width="100%" />
+      <a target="_blank">
+        <img src={url} width="100%" />
+      </a>
     </DialogContent>
   </Dialog>
 );
