@@ -1,7 +1,13 @@
 import React, { createContext, useState } from "react";
 import { Router, Link as RouterLink, Redirect } from "@reach/router";
 import clsx from "clsx";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import {
+  makeStyles,
+  useTheme,
+  createMuiTheme,
+  ThemeProvider,
+  MuiThemeProvider
+} from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -16,6 +22,21 @@ import ImageGrid from "./pages/imageGrid";
 const defaultState = {
   layout: "grid"
 };
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: "#ce93d8",
+      dark: "#ab47bc",
+      light: "#e1bee7"
+    },
+    secondary: {
+      main: "rgba(0, 151, 167, 0.73)",
+      dark: "rgba(0, 96, 100, 0.76)",
+      light: "rgba(77, 208, 225, 0.7)"
+    }
+  }
+});
 export const context = createContext(defaultState);
 const drawerWidth = 240;
 const useStyles = makeStyles(theme => ({
@@ -82,15 +103,11 @@ const useStyles = makeStyles(theme => ({
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(345px, 1fr))",
     gridGap: "2em"
-  },
-  link: {
-    color: "white"
   }
 }));
 
 export default function PersistentDrawerLeft() {
   const classes = useStyles();
-  const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
   const [store, dispatch] = useState(defaultState);
@@ -100,81 +117,86 @@ export default function PersistentDrawerLeft() {
   };
 
   return (
-    <context.Provider value={{ ...store, dispatch }}>
-      <div className={classes.root}>
-        <CssBaseline />
-        <AppBar
-          position="fixed"
-          className={clsx(classes.appBar, {
-            [classes.appBarShift]: open
-          })}
-        >
-          <Toolbar>
-            <IconButton
-              color="yellow"
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              edge="start"
-              className={clsx(classes.menuButton, open && classes.hide)}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" noWrap>
-              <Link component={RouterLink} to="/" color="textSecondary">
-                Chonky.cat
-              </Link>
-            </Typography>
-          </Toolbar>
-        </AppBar>
-        <BurgerMenu
-          classes={classes}
-          open={open}
-          setOpen={setOpen}
-          theme={theme}
-        />
-        <main
-          className={clsx(classes.content, {
-            [classes.contentShift]: open
-          })}
-        >
-          <div className={classes.drawerHeader} />
-          <Router>
-            <ImageGrid path="/" classes={classes} store={store} />
-            <ImageGrid
-              path="/Hot/:page"
-              classes={classes}
-              store={store}
-              sort={"Hot"}
-            />
-            <ImageGrid
-              path="/New/:page"
-              classes={classes}
-              store={store}
-              sort={"New"}
-            />
-            <ImageGrid
-              path="/Top/:page"
-              classes={classes}
-              store={store}
-              sort={"Top"}
-            />
-            <ImageGrid
-              path="/Rising/:page"
-              classes={classes}
-              store={store}
-              sort={"Rising"}
-            />
-            <ImageGrid
-              path="/Leon/:page"
-              classes={classes}
-              store={store}
-              sort={"leon"}
-            />
-            <Redirect from="/Hot" to="/Hot/1" />
-            <Redirect from="/Leon" to="/Leon/1" />
-          </Router>
-        </main>
-      </div>
-    </context.Provider>
+    <MuiThemeProvider theme={theme}>
+      <context.Provider value={{ ...store, dispatch }}>
+        <div className={classes.root}>
+          <CssBaseline />
+          <AppBar
+            position="fixed"
+            className={clsx(classes.appBar, {
+              [classes.appBarShift]: open
+            })}
+          >
+            <Toolbar>
+              <IconButton
+                color="yellow"
+                aria-label="open drawer"
+                onClick={handleDrawerOpen}
+                edge="start"
+                className={clsx(classes.menuButton, open && classes.hide)}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography variant="h6" noWrap>
+                <Link component={RouterLink} to="/" style={{ color: "white" }}>
+                  Chonky.cat
+                </Link>
+              </Typography>
+            </Toolbar>
+          </AppBar>
+          <BurgerMenu
+            classes={classes}
+            open={open}
+            setOpen={setOpen}
+            theme={theme}
+          />
+          <main
+            className={clsx(classes.content, {
+              [classes.contentShift]: open
+            })}
+          >
+            <div className={classes.drawerHeader} />
+            <Router>
+              <ImageGrid path="/" classes={classes} store={store} />
+              <ImageGrid
+                path="/Hot/:page"
+                classes={classes}
+                store={store}
+                sort={"Hot"}
+              />
+              <ImageGrid
+                path="/New/:page"
+                classes={classes}
+                store={store}
+                sort={"New"}
+              />
+              <ImageGrid
+                path="/Top/:page"
+                classes={classes}
+                store={store}
+                sort={"Top"}
+              />
+              <ImageGrid
+                path="/Rising/:page"
+                classes={classes}
+                store={store}
+                sort={"Rising"}
+              />
+              <ImageGrid
+                path="/Leon/:page"
+                classes={classes}
+                store={store}
+                sort={"leon"}
+              />
+              <Redirect from="/Hot" to="/Hot/1" />
+              <Redirect from="/New" to="/New/1" />
+              <Redirect from="/Top" to="/Top/1" />
+              <Redirect from="/Rising" to="/Rising/1" />
+              <Redirect from="/Leon" to="/Leon/1" />
+            </Router>
+          </main>
+        </div>
+      </context.Provider>
+    </MuiThemeProvider>
   );
 }

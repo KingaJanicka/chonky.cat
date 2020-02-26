@@ -18,6 +18,7 @@ const testImage = ({ classes, full, thumbnail }) => {
               thumbnail || full || `https://placeimg.com/${w}/${h}/animals`
             }
             title="animal"
+            component="img"
             loading="lazy"
           ></CardMedia>
         </Link>
