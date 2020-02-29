@@ -21,9 +21,12 @@ import Drawer from "@material-ui/core/Drawer";
 import IconButton from "@material-ui/core/IconButton";
 import { Link as RouterLink } from "@reach/router";
 import Link from "@material-ui/core/Link";
+import { useTranslation } from "react-i18next";
 
 const BurgerMenu = ({ classes, open, setOpen, theme }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const { t, i18n } = useTranslation();
 
   const handleDrawerClose = () => {
     setOpen(false);
@@ -80,7 +83,7 @@ const BurgerMenu = ({ classes, open, setOpen, theme }) => {
                 <ListItemIcon>
                   <WhatshotIcon />
                 </ListItemIcon>
-                <ListItemText primary="Hot" />
+                <ListItemText primary={t("Hot")} />
               </MenuItem>
             </Link>
             <Link component={RouterLink} to="/New" color="white">
@@ -88,7 +91,7 @@ const BurgerMenu = ({ classes, open, setOpen, theme }) => {
                 <ListItemIcon>
                   <NewReleasesIcon />
                 </ListItemIcon>
-                <ListItemText primary="New" />
+                <ListItemText primary={t("New")} />
               </MenuItem>
             </Link>
             <Link component={RouterLink} to="/Top" color="white">
@@ -96,7 +99,7 @@ const BurgerMenu = ({ classes, open, setOpen, theme }) => {
                 <ListItemIcon>
                   <RedditIcon />
                 </ListItemIcon>
-                <ListItemText primary="Top" />
+                <ListItemText primary={t("Top")} />
               </MenuItem>
             </Link>
             <Link component={RouterLink} to="/Rising" color="white">
@@ -104,44 +107,17 @@ const BurgerMenu = ({ classes, open, setOpen, theme }) => {
                 <ListItemIcon>
                   <TrendingUpIcon />
                 </ListItemIcon>
-                <ListItemText primary="Rising" />
+                <ListItemText primary={t("Rising")} />
               </MenuItem>
             </Link>
           </Menu>
           <ListItemIcon>
             <SortIcon />
           </ListItemIcon>
-          <ListItemText primary="Sort by" />
+          <ListItemText primary={t("Sort by")} />
         </ListItem>
       </List>
       <Divider />
-      {/* <List>
-        <Link component={RouterLink} to="/Mail" color="white">
-          <ListItem button text="Mail">
-            <ListItemIcon>
-              <MailIcon />
-            </ListItemIcon>
-            <ListItemText primary="Mail" />
-          </ListItem>
-        </Link>
-        <Link component={RouterLink} to="/Spam" color="white">
-          <ListItem button text="Spam">
-            <ListItemIcon>
-              <InboxIcon />
-            </ListItemIcon>
-            <ListItemText primary="Spam" />
-          </ListItem>
-        </Link>
-        <Link component={RouterLink} to="/Trash" color="white">
-          <ListItem button text="Trash">
-            <ListItemIcon>
-              <DeleteIcon />
-            </ListItemIcon>
-            <ListItemText primary="Trash" />
-          </ListItem>
-        </Link>
-      </List>
-      <Divider /> */}
       <List>
         <Link component={RouterLink} to="/Leon" color="white">
           <ListItem button text="LEON">
@@ -151,6 +127,21 @@ const BurgerMenu = ({ classes, open, setOpen, theme }) => {
             <ListItemText primary="LEON" />
           </ListItem>
         </Link>
+      </List>
+      <Divider />
+      <List>
+        <ListItem button>
+          <ListItemText
+            primary="EN"
+            onClick={() => i18n.changeLanguage("en")}
+          />
+        </ListItem>
+        <ListItem button>
+          <ListItemText
+            primary="CAT"
+            onClick={() => i18n.changeLanguage("cat")}
+          />
+        </ListItem>
       </List>
     </Drawer>
   );
