@@ -15,7 +15,6 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import BurgerMenu from "./burgerMenu";
-import Leon from "./pages/leon";
 import Link from "@material-ui/core/Link";
 import ImageGrid from "./pages/imageGrid";
 
@@ -159,40 +158,41 @@ export default function PersistentDrawerLeft() {
             <Router>
               <ImageGrid path="/" classes={classes} store={store} />
               <ImageGrid
-                path="/Hot/:page"
+                path="/hot/:page"
                 classes={classes}
                 store={store}
-                sort={"Hot"}
+                sort={"hot"}
               />
               <ImageGrid
-                path="/New/:page"
+                path="/new/:page"
                 classes={classes}
                 store={store}
-                sort={"New"}
+                sort={"new"}
               />
               <ImageGrid
-                path="/Top/:page"
+                path="/top/:page"
                 classes={classes}
                 store={store}
-                sort={"Top"}
+                sort={"top"}
               />
               <ImageGrid
-                path="/Rising/:page"
+                path="/rising/:page"
                 classes={classes}
                 store={store}
-                sort={"Rising"}
+                sort={"rising"}
               />
               <ImageGrid
                 path="/Leon/:page"
                 classes={classes}
                 store={store}
-                sort={"leon"}
+                sort={"Leon"}
               />
-              <Redirect from="/Hot" to="/Hot/1" />
-              <Redirect from="/New" to="/New/1" />
-              <Redirect from="/Top" to="/Top/1" />
-              <Redirect from="/Rising" to="/Rising/1" />
-              <Redirect from="/Leon" to="/Leon/1" />
+              {/* <Redirect from="/" to="/hot/1" />
+              <Redirect from="/hot" to="/hot/1" />
+              <Redirect from="/new" to="/new/1" />
+              <Redirect from="/top" to="/top/1" />
+              <Redirect from="/rising" to="/rising/1" />
+              <Redirect from="/Leon" to="/Leon/1" /> */}
             </Router>
           </main>
         </div>

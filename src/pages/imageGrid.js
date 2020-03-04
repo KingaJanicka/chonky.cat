@@ -6,10 +6,13 @@ import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import { Link as RouterLink } from "@reach/router";
 import Modal from "../modal";
+import { useTranslation } from "react-i18next";
 
 const ImageGrid = ({ classes, store, page, sort, AlertDialog }) => {
   const [images, setImages] = useState([]);
   const [url, setOpen] = React.useState(false);
+
+  const { t, i18n } = useTranslation();
 
   const handleClickOpen = img => {
     setOpen(img);
@@ -47,17 +50,17 @@ const ImageGrid = ({ classes, store, page, sort, AlertDialog }) => {
       <ButtonGroup color="primary" aria-label="outlined primary button group">
         {page > 1 && (
           <Button component={RouterLink} to={`/${sort}/${Number(page) - 1}`}>
-            Back
+            {t("Back")}
           </Button>
         )}
         <Button component={RouterLink} to={`/${sort}/${Number(page) + 1}`}>
-          Next
+          {t("Next")}
         </Button>
       </ButtonGroup>
     </>
   );
 };
 
-ImageGrid.defaultProps = { page: 1, sort: "Hot" };
+ImageGrid.defaultProps = { page: 1, sort: "hot" };
 
 export default ImageGrid;

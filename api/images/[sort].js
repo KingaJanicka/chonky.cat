@@ -3,7 +3,7 @@ import { load } from "cheerio";
 
 export default async (req, res) => {
   const { sort = "hot" } = req.query;
-  const endPoint = `https://www.reddit.com/user/Kinga_20/m/cats/.rss?sort=${sort}&limit=100`;
+  const endPoint = `https://www.reddit.com/user/Kinga_20/m/cats/.rss?sort=${sort}`;
   const parser = new Parser();
   const feed = await parser.parseURL(endPoint);
   console.log(feed.items.slice(0, 4));
@@ -35,6 +35,8 @@ export default async (req, res) => {
       };
     })
     .filter(d => d.full);
+  console.log(sort);
+  console.log(endPoint);
 
   return res.json(images);
 };

@@ -78,7 +78,7 @@ const BurgerMenu = ({ classes, open, setOpen, theme }) => {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            <Link component={RouterLink} to="/Hot" color="white">
+            <Link component={RouterLink} to="/hot" color="white">
               <MenuItem onClick={handleClose}>
                 <ListItemIcon>
                   <WhatshotIcon />
@@ -86,7 +86,7 @@ const BurgerMenu = ({ classes, open, setOpen, theme }) => {
                 <ListItemText primary={t("Hot")} />
               </MenuItem>
             </Link>
-            <Link component={RouterLink} to="/New" color="white">
+            <Link component={RouterLink} to="/new" color="white">
               <MenuItem onClick={handleClose}>
                 <ListItemIcon>
                   <NewReleasesIcon />
@@ -94,7 +94,7 @@ const BurgerMenu = ({ classes, open, setOpen, theme }) => {
                 <ListItemText primary={t("New")} />
               </MenuItem>
             </Link>
-            <Link component={RouterLink} to="/Top" color="white">
+            <Link component={RouterLink} to="/top" color="white">
               <MenuItem onClick={handleClose}>
                 <ListItemIcon>
                   <RedditIcon />
@@ -102,7 +102,7 @@ const BurgerMenu = ({ classes, open, setOpen, theme }) => {
                 <ListItemText primary={t("Top")} />
               </MenuItem>
             </Link>
-            <Link component={RouterLink} to="/Rising" color="white">
+            <Link component={RouterLink} to="/rising" color="white">
               <MenuItem onClick={handleClose}>
                 <ListItemIcon>
                   <TrendingUpIcon />

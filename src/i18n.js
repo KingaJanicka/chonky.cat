@@ -10,7 +10,9 @@ const resources = {
       New: "New",
       Top: "Top",
       Rising: "Rising",
-      "Sort by": "Sort by"
+      "Sort by": "Sort by",
+      Back: "Back",
+      Next: "Next"
     }
   },
   cat: {
@@ -19,7 +21,9 @@ const resources = {
       New: "Nou",
       Top: "Cim",
       Rising: "Aixecar-se",
-      "Sort by": "Ordenar per"
+      "Sort by": "Ordenar per",
+      Back: "Esquena",
+      Next: "Pròxim"
     }
   }
 };
