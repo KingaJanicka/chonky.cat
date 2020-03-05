@@ -1,42 +1,96 @@
-import Parser from "rss-parser";
-import { load } from "cheerio";
+import Snoowrap from "snoowrap";
 
 export default async (req, res) => {
-  const { sort = "hot" } = req.query;
-  const endPoint = `https://www.reddit.com/user/Kinga_20/m/cats/.rss?sort=${sort}`;
-  const parser = new Parser();
-  const feed = await parser.parseURL(endPoint);
-  console.log(feed.items.slice(0, 4));
-  const images = feed.items
-    .map(d => {
-      const $ = load(d.content);
-      const full = $(
-        $("a")
-          .toArray()
-          .find(d =>
-            /https?:\/\/(?:(?:www\.)?imgur\.com|i\.redd\.it)\/\w+\.jpe?g/.test(
-              $(d).attr("href")
+  const { sort = "hot", page = 1 } = req.query;
+  const r = new Snoowrap({
+    userAgent: "Chonky.cat v1",
+    clientId: process.env.REDDIT_CLIENT_ID,
+    clientSecret: process.env.REDDIT_CLIENT_SECRET,
+    username: process.env.REDDIT_USERNAME,
+    password: process.env.REDDIT_PASSWORD
+  });
+
+  // const result = await r.getHot().map(post => post.title);
+
+  const multireddit = (await r.getMyMultireddits()).find(
+    s => s.name === "cats"
+  );
+  switch (sort) {
+    default:
+    case "hot":
+      try {
+        const result = (
+          await Promise.all(
+            multireddit.subreddits.map(async subreddit =>
+              (await subreddit.getHot({ limit: 1 * page }))
+                .map(d => ({
+                  permalink: d.permalink,
+                  url: d.url,
+                  author: d.author,
+                  created_utc: d.created_utc,
+                  subreddit: d.subreddit_name_prefixed,
+                  thumbnail: d.thumbnail
+                }))
+                .filter(d => d.url.endsWith(".jpg"))
+                .slice(page - 1, page)
             )
           )
-      ).attr("href");
-      const thumbnail = $(
-        $("img")
-          .toArray()
-          .find(d => /https?:\/\/a\.thumbs\.redditmedia/.test($(d).attr("src")))
-      ).attr("src");
+        ).reduce((a, c) => a.concat(c), []);
 
-      return {
-        title: d.title,
-        link: d.link,
-        full,
-        thumbnail,
-        author: d.author,
-        isoDate: d.isoDate
-      };
-    })
-    .filter(d => d.full);
-  console.log(sort);
-  console.log(endPoint);
+        return res.json(result);
+      } catch (e) {
+        return res.json([]);
+      }
+    case "rising":
+      return res.json(
+        (
+          await Promise.all(
+            multireddit.subreddits.map(async subreddit =>
+              (await subreddit.getRising({})).map(d => ({
+                permalink: d.permalink,
+                url: d.url,
+                author: d.author,
+                created_utc: d.created_utc,
+                subreddit: d.subreddit_name_prefixed
+              }))
+            )
+          )
+        ).reduce((a, c) => a.concat(c), [])
+      );
+    case "top":
+      return res.json(
+        (
+          await Promise.all(
+            multireddit.subreddits.map(async subreddit =>
+              (await subreddit.getTop()).map(d => ({
+                permalink: d.permalink,
+                url: d.url,
+                author: d.author,
+                created_utc: d.created_utc,
+                subreddit: d.subreddit_name_prefixed
+              }))
+            )
+          )
+        ).reduce((a, c) => a.concat(c), [])
+      );
+    case "new":
+      return res.json(
+        (
+          await Promise.all(
+            multireddit.subreddits.map(async subreddit =>
+              (await subreddit.getNew()).map(d => ({
+                permalink: d.permalink,
+                url: d.url,
+                author: d.author,
+                created_utc: d.created_utc,
+                subreddit: d.subreddit_name_prefixed,
+                thumbnail: d.thumbnail
+              }))
+            )
+          )
+        ).reduce((a, c) => a.concat(c), [])
+      );
+  }
 
-  return res.json(images);
+  return res.json([]);
 };

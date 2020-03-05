@@ -187,12 +187,12 @@ export default function PersistentDrawerLeft() {
                 store={store}
                 sort={"Leon"}
               />
-              {/* <Redirect from="/" to="/hot/1" />
+              <Redirect from="/" to="/hot/1" />
               <Redirect from="/hot" to="/hot/1" />
               <Redirect from="/new" to="/new/1" />
               <Redirect from="/top" to="/top/1" />
               <Redirect from="/rising" to="/rising/1" />
-              <Redirect from="/Leon" to="/Leon/1" /> */}
+              <Redirect from="/Leon" to="/Leon/1" />
             </Router>
           </main>
         </div>

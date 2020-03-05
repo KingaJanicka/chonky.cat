@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import clsx from "clsx";
 import TestImage from "../testImage";
-import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import { Link as RouterLink } from "@reach/router";
@@ -36,13 +35,9 @@ const ImageGrid = ({ classes, store, page, sort, AlertDialog }) => {
           <Button
             variant="text"
             color="primary"
-            onClick={() => handleClickOpen(d.full)}
+            onClick={() => handleClickOpen(d.url)}
           >
-            <TestImage
-              classes={classes}
-              thumbnail={d.thumbnail}
-              full={d.full}
-            />
+            <TestImage classes={classes} thumbnail={d.thumbnail} url={d.url} />
           </Button>
         ))}
         <Modal url={url} classes={classes} handleClose={handleClose} />
