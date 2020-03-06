@@ -15,7 +15,7 @@ const Modal = ({ url, classes, handleClose }) => (
     aria-describedby="alert-dialog-description"
   >
     <DialogContent>
-      <a href={url} target="_blank">
+      <a href={url} target="_blank" rel="noopener noreferrer">
         <img src={url} width="100%" />
       </a>
     </DialogContent>
