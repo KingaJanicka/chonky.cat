@@ -7,9 +7,10 @@ import { Link as RouterLink } from "@reach/router";
 import Modal from "../modal";
 import { useTranslation } from "react-i18next";
 
-const ImageGrid = ({ classes, store, page, sort, AlertDialog }) => {
+const ImageGrid = ({ classes, store, page, sort, ...props }) => {
   const [images, setImages] = useState([]);
   const [url, setOpen] = React.useState(false);
+  const [time, setTime] = useState("week");
 
   const { t, i18n } = useTranslation();
 
@@ -21,15 +22,25 @@ const ImageGrid = ({ classes, store, page, sort, AlertDialog }) => {
     setOpen(false);
   };
   useEffect(() => {
-    const endPoint = `/api/images/${sort}?page=${page}`;
+    const endPoint = `/api/images/${sort}?page=${page}&time=${time}`;
     fetch(endPoint)
       .then(res => res.json())
       .then(res => {
         setImages(res);
       });
-  }, [page, sort]);
+  }, [page, sort, time]);
   return (
     <>
+      {sort === "top" && (
+        <ButtonGroup color="primary">
+          <Button onClick={() => setTime("hour")}>Hour</Button>
+          <Button onClick={() => setTime("day")}>Day</Button>
+          <Button onClick={() => setTime("week")}>Week</Button>
+          <Button onClick={() => setTime("month")}>Month</Button>
+          <Button onClick={() => setTime("year")}>Year</Button>
+          <Button onClick={() => setTime("all")}>All time</Button>
+        </ButtonGroup>
+      )}
       <div className={clsx(classes.imageContainer, classes[store.layout])}>
         {images.map(d => (
           <Button

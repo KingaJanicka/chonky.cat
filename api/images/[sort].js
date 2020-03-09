@@ -1,7 +1,7 @@
 import Snoowrap from "snoowrap";
 
 export default async (req, res) => {
-  const { sort = "hot", page = 1 } = req.query;
+  const { sort = "hot", page = 1, time = "week" } = req.query;
   const r = new Snoowrap({
     userAgent: "Chonky.cat v1",
     clientId: process.env.REDDIT_CLIENT_ID,
@@ -18,6 +18,7 @@ export default async (req, res) => {
   switch (sort) {
     default:
     case "hot":
+      console.log("Sort: hot");
       try {
         const result = (
           await Promise.all(
@@ -42,33 +43,47 @@ export default async (req, res) => {
         return res.json([]);
       }
     case "rising":
+      console.log("Sort: rising");
       return res.json(
         (
           await Promise.all(
-            multireddit.subreddits.map(async subreddit =>
-              (await subreddit.getRising({})).map(d => ({
-                permalink: d.permalink,
-                url: d.url,
-                author: d.author,
-                created_utc: d.created_utc,
-                subreddit: d.subreddit_name_prefixed
-              }))
+            multireddit.subreddits.map(
+              async subreddit =>
+                await subreddit
+                  .getRising({ limit: 1 * page })
+                  .map(d => ({
+                    permalink: d.permalink,
+                    url: d.url,
+                    author: d.author,
+                    created_utc: d.created_utc,
+                    subreddit: d.subreddit_name_prefixed
+                  }))
+
+                  .filter(d => d.url.endsWith(".jpg"))
+                  .slice(page - 1, page)
             )
           )
         ).reduce((a, c) => a.concat(c), [])
       );
     case "top":
+      console.log("Sort: top");
       return res.json(
         (
           await Promise.all(
             multireddit.subreddits.map(async subreddit =>
-              (await subreddit.getTop()).map(d => ({
-                permalink: d.permalink,
-                url: d.url,
-                author: d.author,
-                created_utc: d.created_utc,
-                subreddit: d.subreddit_name_prefixed
-              }))
+              // (await subreddit.getTop({ time: time })).map(d => ({
+              (await subreddit.getTop({ limit: 1 * page, time }))
+                .map(d => ({
+                  permalink: d.permalink,
+                  url: d.url,
+                  author: d.author,
+                  created_utc: d.created_utc,
+                  subreddit: d.subreddit_name_prefixed,
+                  thumbnail: d.thumbnail
+                }))
+
+                .filter(d => d.url.endsWith(".jpg"))
+                .slice(page - 1, page)
             )
           )
         ).reduce((a, c) => a.concat(c), [])
@@ -78,19 +93,23 @@ export default async (req, res) => {
         (
           await Promise.all(
             multireddit.subreddits.map(async subreddit =>
-              (await subreddit.getNew()).map(d => ({
-                permalink: d.permalink,
-                url: d.url,
-                author: d.author,
-                created_utc: d.created_utc,
-                subreddit: d.subreddit_name_prefixed,
-                thumbnail: d.thumbnail
-              }))
+              (await subreddit.getNew({ limit: 1 * page }))
+                .map(d => ({
+                  permalink: d.permalink,
+                  url: d.url,
+                  author: d.author,
+                  created_utc: d.created_utc,
+                  subreddit: d.subreddit_name_prefixed,
+                  thumbnail: d.thumbnail
+                }))
+
+                .filter(d => d.url.endsWith(".jpg"))
+                .slice(page - 1, page)
             )
           )
         ).reduce((a, c) => a.concat(c), [])
       );
   }
-
-  return res.json([]);
 };
+
+///  https://not-an-aardvark.github.io/snoowrap/Subreddit.html#getTop__anchor

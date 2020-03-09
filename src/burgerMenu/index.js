@@ -20,8 +20,6 @@ import { Link as RouterLink } from "@reach/router";
 import Link from "@material-ui/core/Link";
 import { useTranslation } from "react-i18next";
 import SvgIcon from "@material-ui/core/SvgIcon";
-import CatFlag from "../Flag_of_Catalonia.svg";
-import UKFlag from "../Flag_of_the_United_Kingdom.svg";
 
 const BurgerMenu = ({ classes, open, setOpen, theme }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
