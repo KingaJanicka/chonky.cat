@@ -85,13 +85,13 @@ const useStyles = makeStyles(theme => ({
     }),
     marginLeft: -drawerWidth
   },
-  contentShift: {
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen
-    }),
-    marginLeft: 0
-  },
+  // contentShift: {
+  //   transition: theme.transitions.create("margin", {
+  //     easing: theme.transitions.easing.easeOut,
+  //     duration: theme.transitions.duration.enteringScreen
+  //   }),
+  //   marginLeft: 0
+  //},
   card: {
     width: "100%"
   },
@@ -123,7 +123,7 @@ export default function PersistentDrawerLeft() {
           <AppBar
             position="fixed"
             className={clsx(classes.appBar, {
-              [classes.appBarShift]: open
+              // [classes.appBarShift]: open
             })}
           >
             <Toolbar>
