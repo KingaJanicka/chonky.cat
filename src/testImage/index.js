@@ -4,19 +4,16 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import Link from "@material-ui/core/Link";
 
-const testImage = ({ classes, full, thumbnail }) => {
-  const w = Math.round(Math.random() * 800);
-  const h = Math.round(Math.random() * 800);
-
-  return (
+const testImage = ({ classes, full, preview }) => {
+  const [image] = preview.images || [];
+  const [, , thumbnail] = image.resolutions || [];
+  return thumbnail.url ? (
     <Card className={classes.card}>
       <CardActionArea>
         <Link>
           <CardMedia
             className={classes.media}
-            image={
-              thumbnail || full || `https://placeimg.com/${w}/${h}/animals`
-            }
+            image={thumbnail.url}
             title="animal"
             component="img"
             loading="lazy"
@@ -24,7 +21,7 @@ const testImage = ({ classes, full, thumbnail }) => {
         </Link>
       </CardActionArea>
     </Card>
-  );
+  ) : null;
 };
 
 export default testImage;

@@ -8,12 +8,16 @@ import Modal from "../modal";
 import { useTranslation } from "react-i18next";
 import { Typography } from "@material-ui/core";
 
-const ImageGrid = ({ classes, store, page, sort, ...props }) => {
+const ImageGrid = ({ classes, store, page, sort, location, ...props }) => {
+  console.log(location);
   const [images, setImages] = useState([]);
   const [url, setOpen] = React.useState(false);
   const [time, setTime] = useState("week");
 
   const { t, i18n } = useTranslation();
+
+  const [firstImage] = images;
+  const [lastImage] = [...images].reverse();
 
   const handleClickOpen = img => {
     setOpen(img);
@@ -23,13 +27,14 @@ const ImageGrid = ({ classes, store, page, sort, ...props }) => {
     setOpen(false);
   };
   useEffect(() => {
-    const endPoint = `/api/images/${sort}?page=${page}&time=${time}`;
+    const [direction, name] = location.search.slice(1).split("=");
+    const endPoint = `/api/images/${sort}?page=${page}&time=${time}&${direction}=${name}`;
     fetch(endPoint)
       .then(res => res.json())
       .then(res => {
         setImages(res);
       });
-  }, [page, sort, time]);
+  }, [location.search, page, sort, time]);
   return (
     <>
       {sort === "top" && (
@@ -49,21 +54,29 @@ const ImageGrid = ({ classes, store, page, sort, ...props }) => {
             color="primary"
             onClick={() => handleClickOpen(d.url)}
           >
-            <TestImage classes={classes} thumbnail={d.thumbnail} url={d.url} />
+            <TestImage classes={classes} preview={d.preview} url={d.url} />
           </Button>
         ))}
         <Modal url={url} classes={classes} handleClose={handleClose} />
       </div>
 
       <ButtonGroup color="primary" aria-label="outlined primary button group">
-        {page > 1 && (
-          <Button component={RouterLink} to={`/${sort}/${Number(page) - 1}`}>
+        {page > 1 && firstImage && (
+          <Button
+            component={RouterLink}
+            to={`/${sort}/${Number(page) - 1}?before=${firstImage.name}`}
+          >
             {t("Back")}
           </Button>
         )}
-        <Button component={RouterLink} to={`/${sort}/${Number(page) + 1}`}>
-          {t("Next")}
-        </Button>
+        {lastImage && (
+          <Button
+            component={RouterLink}
+            to={`/${sort}/${Number(page) + 1}?after=${lastImage.name}`}
+          >
+            {t("Next")}
+          </Button>
+        )}
       </ButtonGroup>
       <Typography>Current Page : {page}</Typography>
     </>

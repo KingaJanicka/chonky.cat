@@ -1,7 +1,7 @@
 import Snoowrap from "snoowrap";
 
 export default async (req, res) => {
-  const { sort = "hot", page = 1, time = "week" } = req.query;
+  const { sort = "hot", page = 1, time = "week", before, after } = req.query;
   const r = new Snoowrap({
     userAgent: "Chonky.cat v1",
     clientId: process.env.REDDIT_CLIENT_ID,
@@ -21,23 +21,27 @@ export default async (req, res) => {
         const result = (
           await Promise.all(
             multireddit.subreddits.map(async subreddit =>
-              (await subreddit.getHot({ limit: 1 * page }))
-                .map(d => ({
-                  permalink: d.permalink,
-                  url: d.url,
-                  author: d.author,
-                  created_utc: d.created_utc,
-                  subreddit: d.subreddit_name_prefixed,
-                  thumbnail: d.thumbnail
-                }))
+              (await subreddit.getHot({ before, after }))
+                .map(d => {
+                  return {
+                    permalink: d.permalink,
+                    url: d.url,
+                    author: d.author,
+                    created_utc: d.created_utc,
+                    subreddit: d.subreddit_name_prefixed,
+                    thumbnail: d.thumbnail,
+                    preview: d.preview,
+                    name: d.name
+                  };
+                })
                 .filter(d => d.url.endsWith(".jpg"))
-                .slice(page - 1, page)
             )
           )
         ).reduce((a, c) => a.concat(c), []);
 
         return res.json(result);
       } catch (e) {
+        console.log(e);
         return res.json([]);
       }
     case "rising":
@@ -48,14 +52,15 @@ export default async (req, res) => {
             multireddit.subreddits.map(
               async subreddit =>
                 await subreddit
-                  .getRising({ limit: 1 * page })
+                  .getRising({ before, after })
                   .map(d => ({
                     permalink: d.permalink,
                     url: d.url,
                     author: d.author,
                     created_utc: d.created_utc,
                     subreddit: d.subreddit_name_prefixed,
-                    thumbnail: d.thumbnail
+                    preview: d.preview,
+                    name: d.name
                   }))
 
                   .filter(d => d.url.endsWith(".jpg"))
@@ -71,14 +76,14 @@ export default async (req, res) => {
           await Promise.all(
             multireddit.subreddits.map(async subreddit =>
               // (await subreddit.getTop({ time: time })).map(d => ({
-              (await subreddit.getTop({ limit: 1 * page, time }))
+              (await subreddit.getTop({ before, after }))
                 .map(d => ({
                   permalink: d.permalink,
                   url: d.url,
                   author: d.author,
                   created_utc: d.created_utc,
-                  subreddit: d.subreddit_name_prefixed,
-                  thumbnail: d.thumbnail
+                  preview: d.preview,
+                  name: d.name
                 }))
 
                 .filter(d => d.url.endsWith(".jpg"))
@@ -91,20 +96,20 @@ export default async (req, res) => {
       return res.json(
         (
           await Promise.all(
-            multireddit.subreddits.map(
-              async subreddit =>
-                (await subreddit.getNew({ limit: 1 * page }))
-                  .map(d => ({
-                    permalink: d.permalink,
-                    url: d.url,
-                    author: d.author,
-                    created_utc: d.created_utc,
-                    subreddit: d.subreddit_name_prefixed,
-                    thumbnail: d.thumbnail
-                  }))
+            multireddit.subreddits.map(async subreddit =>
+              (await subreddit.getNew({ before, after }))
+                .map(d => ({
+                  permalink: d.permalink,
+                  url: d.url,
+                  author: d.author,
+                  created_utc: d.created_utc,
+                  subreddit: d.subreddit_name_prefixed,
+                  preview: d.preview,
+                  name: d.name
+                }))
 
-                  .filter(d => d.url.endsWith(".jpg"))
-              .slice(page - 1, page)
+                .filter(d => d.url.endsWith(".jpg"))
+                .slice(page - 1, page)
             )
           )
         ).reduce((a, c) => a.concat(c), [])
