@@ -12,7 +12,7 @@ const Modal = ({ url, classes, handleClose }) => (
   >
     <DialogContent>
       <a href={url} target="_blank" rel="noopener noreferrer">
-        <img src={url} width="100%" />
+        <img src={url} width="100%" alt="cat" />
       </a>
     </DialogContent>
   </Dialog>

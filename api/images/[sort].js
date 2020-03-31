@@ -75,8 +75,7 @@ export default async (req, res) => {
         (
           await Promise.all(
             multireddit.subreddits.map(async subreddit =>
-              // (await subreddit.getTop({ time: time })).map(d => ({
-              (await subreddit.getTop({ before, after }))
+              (await subreddit.getTop({ before, after, time }))
                 .map(d => ({
                   permalink: d.permalink,
                   url: d.url,

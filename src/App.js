@@ -3,9 +3,9 @@ import { Router, Link as RouterLink, Redirect } from "@reach/router";
 import clsx from "clsx";
 import {
   makeStyles,
-  useTheme,
+  //useTheme,
   createMuiTheme,
-  ThemeProvider,
+  //ThemeProvider,
   MuiThemeProvider
 } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";

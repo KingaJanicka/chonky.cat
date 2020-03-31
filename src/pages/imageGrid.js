@@ -14,7 +14,7 @@ const ImageGrid = ({ classes, store, page, sort, location, ...props }) => {
   const [url, setOpen] = React.useState(false);
   const [time, setTime] = useState("week");
 
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const [firstImage] = images;
   const [lastImage] = [...images].reverse();
