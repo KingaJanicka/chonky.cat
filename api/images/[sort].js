@@ -10,8 +10,6 @@ export default async (req, res) => {
     password: process.env.REDDIT_PASSWORD
   });
 
-  // const result = await r.getHot().map(post => post.title);
-
   const multireddit = (await r.getMyMultireddits()).find(
     s => s.name === "cats"
   );
@@ -93,19 +91,20 @@ export default async (req, res) => {
       return res.json(
         (
           await Promise.all(
-            multireddit.subreddits.map(async subreddit =>
-              (await subreddit.getNew({ limit: 1 * page }))
-                .map(d => ({
-                  permalink: d.permalink,
-                  url: d.url,
-                  author: d.author,
-                  created_utc: d.created_utc,
-                  subreddit: d.subreddit_name_prefixed,
-                  thumbnail: d.thumbnail
-                }))
+            multireddit.subreddits.map(
+              async subreddit =>
+                (await subreddit.getNew({ limit: 1 * page }))
+                  .map(d => ({
+                    permalink: d.permalink,
+                    url: d.url,
+                    author: d.author,
+                    created_utc: d.created_utc,
+                    subreddit: d.subreddit_name_prefixed,
+                    thumbnail: d.thumbnail
+                  }))
 
-                .filter(d => d.url.endsWith(".jpg"))
-                .slice(page - 1, page)
+                  .filter(d => d.url.endsWith(".jpg"))
+              .slice(page - 1, page)
             )
           )
         ).reduce((a, c) => a.concat(c), [])

@@ -6,6 +6,7 @@ import ButtonGroup from "@material-ui/core/ButtonGroup";
 import { Link as RouterLink } from "@reach/router";
 import Modal from "../modal";
 import { useTranslation } from "react-i18next";
+import { Typography } from "@material-ui/core";
 
 const ImageGrid = ({ classes, store, page, sort, ...props }) => {
   const [images, setImages] = useState([]);
@@ -53,6 +54,7 @@ const ImageGrid = ({ classes, store, page, sort, ...props }) => {
         ))}
         <Modal url={url} classes={classes} handleClose={handleClose} />
       </div>
+
       <ButtonGroup color="primary" aria-label="outlined primary button group">
         {page > 1 && (
           <Button component={RouterLink} to={`/${sort}/${Number(page) - 1}`}>
@@ -63,6 +65,7 @@ const ImageGrid = ({ classes, store, page, sort, ...props }) => {
           {t("Next")}
         </Button>
       </ButtonGroup>
+      <Typography>Current Page : {page}</Typography>
     </>
   );
 };
