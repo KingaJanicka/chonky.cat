@@ -28,7 +28,9 @@ const ImageGrid = ({ classes, store, page, sort, location, ...props }) => {
   };
   useEffect(() => {
     const [direction, name] = location.search.slice(1).split("=");
-    const endPoint = `/api/images/${sort}?page=${page}&time=${time}&${direction}=${name}`;
+    const endPoint = `/api/images/${sort}?page=${page}&time=${time}${
+      direction && name ? `&${direction}=${name}` : ""
+    }`;
     fetch(endPoint)
       .then(res => res.json())
       .then(res => {
@@ -63,6 +65,7 @@ const ImageGrid = ({ classes, store, page, sort, location, ...props }) => {
       <ButtonGroup color="primary" aria-label="outlined primary button group">
         {page > 1 && firstImage && (
           <Button
+            onClick={() => window.scrollTo(0, 0)}
             component={RouterLink}
             to={`/${sort}/${Number(page) - 1}?before=${firstImage.name}`}
           >
@@ -71,6 +74,7 @@ const ImageGrid = ({ classes, store, page, sort, location, ...props }) => {
         )}
         {lastImage && (
           <Button
+            onClick={() => window.scrollTo(0, 0)}
             component={RouterLink}
             to={`/${sort}/${Number(page) + 1}?after=${lastImage.name}`}
           >

@@ -4,16 +4,16 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import Link from "@material-ui/core/Link";
 
-const testImage = ({ classes, full, preview }) => {
+const testImage = ({ classes, url, preview }) => {
   const [image] = preview.images || [];
   const [, , thumbnail] = image.resolutions || [];
-  return thumbnail.url ? (
+  return (
     <Card className={classes.card}>
       <CardActionArea>
         <Link>
           <CardMedia
             className={classes.media}
-            image={thumbnail.url}
+            image={(thumbnail && thumbnail.url) || url}
             title="animal"
             component="img"
             loading="lazy"
@@ -21,7 +21,7 @@ const testImage = ({ classes, full, preview }) => {
         </Link>
       </CardActionArea>
     </Card>
-  ) : null;
+  );
 };
 
 export default testImage;
