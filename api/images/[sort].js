@@ -7,7 +7,7 @@ export default async (req, res) => {
     clientId: process.env.REDDIT_CLIENT_ID,
     clientSecret: process.env.REDDIT_CLIENT_SECRET,
     username: process.env.REDDIT_USERNAME,
-    password: process.env.REDDIT_PASSWORD
+    password: process.env.REDDIT_PASSWORD,
   });
   try {
     return res.json(
@@ -15,20 +15,20 @@ export default async (req, res) => {
         await r.oauthRequest({
           uri: `/user/kinga_20/m/cats/${sort}`,
           method: "get",
-          qs: { limit: 50, t: time, before, after }
+          qs: { limit: 50, t: time, before, after },
         })
       )
-        .map(d => ({
+        .map((d) => ({
           permalink: d.permalink,
           url: d.url,
           author: d.author,
           created_utc: d.created_utc,
           subreddit: d.subreddit_name_prefixed,
           preview: d.preview,
-          name: d.name
+          name: d.name,
         }))
 
-        .filter(d => d.url.endsWith(".jpg"))
+        .filter((d) => d.url.endsWith(".jpg") && d.preview)
     );
   } catch (e) {
     console.error(e);

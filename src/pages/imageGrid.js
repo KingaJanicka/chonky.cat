@@ -19,7 +19,7 @@ const ImageGrid = ({ classes, store, page, sort, location, ...props }) => {
   const [firstImage] = images;
   const [lastImage] = [...images].reverse();
 
-  const handleClickOpen = img => {
+  const handleClickOpen = (img) => {
     setOpen(img);
   };
 
@@ -32,8 +32,8 @@ const ImageGrid = ({ classes, store, page, sort, location, ...props }) => {
       direction && name ? `&${direction}=${name}` : ""
     }`;
     fetch(endPoint)
-      .then(res => res.json())
-      .then(res => {
+      .then((res) => res.json())
+      .then((res) => {
         setImages(res);
       });
   }, [location.search, page, sort, time]);
@@ -50,8 +50,9 @@ const ImageGrid = ({ classes, store, page, sort, location, ...props }) => {
         </ButtonGroup>
       )}
       <div className={clsx(classes.imageContainer, classes[store.layout])}>
-        {images.map(d => (
+        {images.map((d) => (
           <Button
+            key={d.name}
             variant="text"
             color="primary"
             onClick={() => handleClickOpen(d.url)}
@@ -65,7 +66,10 @@ const ImageGrid = ({ classes, store, page, sort, location, ...props }) => {
       <ButtonGroup color="primary" aria-label="outlined primary button group">
         {page > 1 && firstImage && (
           <Button
-            onClick={() => window.scrollTo(0, 0)}
+            onClick={() => {
+              setImages([]);
+              window.scrollTo(0, 0);
+            }}
             component={RouterLink}
             to={`/${sort}/${Number(page) - 1}?before=${firstImage.name}`}
           >
@@ -74,7 +78,10 @@ const ImageGrid = ({ classes, store, page, sort, location, ...props }) => {
         )}
         {lastImage && (
           <Button
-            onClick={() => window.scrollTo(0, 0)}
+            onClick={() => {
+              setImages([]);
+              window.scrollTo(0, 0);
+            }}
             component={RouterLink}
             to={`/${sort}/${Number(page) + 1}?after=${lastImage.name}`}
           >
