@@ -30,7 +30,7 @@ const BurgerMenu = ({ classes, open, setOpen, theme }) => {
     setOpen(false);
   };
 
-  const handleClick = event => {
+  const handleClick = (event) => {
     if (anchorEl) {
       setAnchorEl(null);
     } else {
@@ -49,7 +49,7 @@ const BurgerMenu = ({ classes, open, setOpen, theme }) => {
       anchor="left"
       open={open}
       classes={{
-        paper: classes.drawerPaper
+        paper: classes.drawerPaper,
       }}
     >
       <div className={classes.drawerHeader}>

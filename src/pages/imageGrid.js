@@ -7,6 +7,7 @@ import { Link as RouterLink } from "@reach/router";
 import Modal from "../modal";
 import { useTranslation } from "react-i18next";
 import { Typography } from "@material-ui/core";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const ImageGrid = ({ classes, store, page, sort, location, ...props }) => {
   console.log(location);
@@ -50,16 +51,20 @@ const ImageGrid = ({ classes, store, page, sort, location, ...props }) => {
         </ButtonGroup>
       )}
       <div className={clsx(classes.imageContainer, classes[store.layout])}>
-        {images.map((d) => (
-          <Button
-            key={d.name}
-            variant="text"
-            color="primary"
-            onClick={() => handleClickOpen(d.url)}
-          >
-            <TestImage classes={classes} preview={d.preview} url={d.url} />
-          </Button>
-        ))}
+        {!images.length ? (
+          <CircularProgress />
+        ) : (
+          images.map((d) => (
+            <Button
+              key={d.name}
+              variant="text"
+              color="primary"
+              onClick={() => handleClickOpen(d.url)}
+            >
+              <TestImage classes={classes} preview={d.preview} url={d.url} />
+            </Button>
+          ))
+        )}
         <Modal url={url} classes={classes} handleClose={handleClose} />
       </div>
 
