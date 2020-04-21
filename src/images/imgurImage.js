@@ -4,15 +4,13 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import Link from "@material-ui/core/Link";
 
-const testImage = ({ classes, url, preview }) => {
-  const [image] = preview.images || [];
-  const [, , thumbnail] = image.resolutions || [];
+const ImgurImage = ({ classes, url, thumbnail }) => {
   return (
     <Card className={classes.card}>
       <CardActionArea>
         <Link>
           <CardMedia
-            className={classes.media}
+            cclassName={classes.media}
             image={(thumbnail && thumbnail.url) || url}
             title="animal"
             component="img"
@@ -24,4 +22,4 @@ const testImage = ({ classes, url, preview }) => {
   );
 };
 
-export default testImage;
+export default ImgurImage;

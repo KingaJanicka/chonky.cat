@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import clsx from "clsx";
-import TestImage from "../testImage";
+import RedditImage from "../images/redditImage";
+import ImgurImage from "../images/imgurImage";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import { Link as RouterLink } from "@reach/router";
@@ -11,6 +12,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 
 const ImageGrid = ({ classes, store, page, sort, location, ...props }) => {
   console.log(location);
+  const isLeon = /leon/i.test(location.pathname);
   const [images, setImages] = useState([]);
   const [url, setOpen] = React.useState(false);
   const [time, setTime] = useState("week");
@@ -61,7 +63,15 @@ const ImageGrid = ({ classes, store, page, sort, location, ...props }) => {
               color="primary"
               onClick={() => handleClickOpen(d.url)}
             >
-              <TestImage classes={classes} preview={d.preview} url={d.url} />
+              {isLeon ? (
+                <ImgurImage classes={classes} preview={d.preview} url={d.url} />
+              ) : (
+                <RedditImage
+                  classes={classes}
+                  preview={d.preview}
+                  url={d.url}
+                />
+              )}
             </Button>
           ))
         )}
