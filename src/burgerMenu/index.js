@@ -77,7 +77,12 @@ const BurgerMenu = ({ classes, open, setOpen, theme }) => {
             onClose={handleClose}
           >
             <Link component={RouterLink} to="/hot" color="white">
-              <MenuItem onClick={handleClose}>
+              <MenuItem
+                onClick={() => {
+                  handleClose();
+                  handleDrawerClose();
+                }}
+              >
                 <ListItemIcon>
                   <WhatshotIcon />
                 </ListItemIcon>
@@ -85,7 +90,12 @@ const BurgerMenu = ({ classes, open, setOpen, theme }) => {
               </MenuItem>
             </Link>
             <Link component={RouterLink} to="/new" color="white">
-              <MenuItem onClick={handleClose}>
+              <MenuItem
+                onClick={() => {
+                  handleClose();
+                  handleDrawerClose();
+                }}
+              >
                 <ListItemIcon>
                   <NewReleasesIcon />
                 </ListItemIcon>
@@ -93,7 +103,12 @@ const BurgerMenu = ({ classes, open, setOpen, theme }) => {
               </MenuItem>
             </Link>
             <Link component={RouterLink} to="/top" color="white">
-              <MenuItem onClick={handleClose}>
+              <MenuItem
+                onClick={() => {
+                  handleClose();
+                  handleDrawerClose();
+                }}
+              >
                 <ListItemIcon>
                   <RedditIcon />
                 </ListItemIcon>
@@ -101,7 +116,12 @@ const BurgerMenu = ({ classes, open, setOpen, theme }) => {
               </MenuItem>
             </Link>
             <Link component={RouterLink} to="/rising" color="white">
-              <MenuItem onClick={handleClose}>
+              <MenuItem
+                onClick={() => {
+                  handleClose();
+                  handleDrawerClose();
+                }}
+              >
                 <ListItemIcon>
                   <TrendingUpIcon />
                 </ListItemIcon>
@@ -118,7 +138,7 @@ const BurgerMenu = ({ classes, open, setOpen, theme }) => {
       <Divider />
       <List>
         <Link component={RouterLink} to="/Leon" color="white">
-          <ListItem button text="LEON">
+          <ListItem onClick={handleDrawerClose} button text="LEON">
             <ListItemIcon>
               <PetsIcon />
             </ListItemIcon>

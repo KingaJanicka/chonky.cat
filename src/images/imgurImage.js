@@ -10,7 +10,7 @@ const ImgurImage = ({ classes, url, thumbnail }) => {
       <CardActionArea>
         <Link>
           <CardMedia
-            cclassName={classes.media}
+            className={classes.media}
             image={(thumbnail && thumbnail.url) || url}
             title="animal"
             component="img"
