@@ -1,7 +1,11 @@
 import Snoowrap from "snoowrap";
+import leon from "./leon";
 
 export default async (req, res) => {
   const { sort = "hot", time = "week", before, after } = req.query;
+  if (sort === "Leon") {
+    return leon(req, res);
+  }
   const r = new Snoowrap({
     userAgent: "Chonky.cat v1",
     clientId: process.env.REDDIT_CLIENT_ID,
