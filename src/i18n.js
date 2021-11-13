@@ -33,7 +33,6 @@ i18n
   .init({
     resources,
     lng: "en",
-    ////test
     keySeparator: false, // we do not use keys in form messages.welcome
 
     interpolation: {
